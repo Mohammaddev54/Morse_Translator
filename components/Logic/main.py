@@ -22,25 +22,28 @@ morse_code_dict_inverted = {
 }
 
 
-def convert_to_english(user_input):
+def convert_to_english(user_input:str)->list:
     output = []
-    user_input = user_input.split(" ")
-    for i in user_input:
-        if i not in morse_code_dict_inverted:
+
+    parts = user_input.split(" ")
+
+    for code in parts:
+        if code not in morse_code_dict_inverted.keys():
             output.append("IDK")
-            continue
-        output.append(morse_code_dict_inverted[i])
+        else:
+            output.append(morse_code_dict_inverted[code])
     return output
 
 
-def convert_to_morse(user_input):
+def convert_to_morse(user_input:str)->list:
     output = []
-    user_input.split(" ")
-    for i in user_input:
-        if i not in morse_code_dict:
+
+    word = user_input
+    for character in word:
+        if character in morse_code_dict.keys():
+            output.append(morse_code_dict[character])
+        else:
             output.append("IDK")
-            continue
-        output.append(morse_code_dict[i])
     return output
 
 
@@ -48,9 +51,12 @@ def main():
     user_input = input().upper()
     if user_input.startswith("-") or user_input.startswith("."):
         print(convert_to_english(user_input))
+        # for i in convert_to_english(user_input):
+        #     print(i, end=" ")
     else:
-        for i in convert_to_morse(user_input):
-            print(i, end=" ")
+        print(convert_to_morse(user_input))
+        # for i in convert_to_morse(user_input):
+        #     print(i, end=" ")
 
 
 if __name__ == "__main__":
